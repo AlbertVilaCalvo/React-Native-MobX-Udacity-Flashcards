@@ -28,13 +28,19 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import DeckDetailScreen from './src/screens/DeckDetailScreen';
 import NewDeckScreen from './src/screens/NewDeckScreen';
+import CustomStatusBar from './src/components/CustomStatusBar';
 
 const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: {backgroundColor: 'tomato'},
+        }}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -59,12 +65,12 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="DeckDetail"
           component={DeckDetailScreen}
-          options={{title: 'Deck Detail'}}
+          options={{title: 'Deck Detail', headerBackTitle: 'Home'}}
         />
         <Stack.Screen
           name="NewDeck"
           component={NewDeckScreen}
-          options={{title: 'Create New Deck'}}
+          options={{title: 'Create New Deck', headerBackTitle: 'Home'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -74,7 +80,7 @@ const App: () => React$Node = () => {
 const WelcomeScreen = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <CustomStatusBar />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"

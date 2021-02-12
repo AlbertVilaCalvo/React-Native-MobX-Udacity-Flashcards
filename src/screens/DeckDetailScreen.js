@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import {SafeAreaView, Text} from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 const DeckDetailScreen = ({route}) => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <CustomStatusBar />
       <SafeAreaView>
         <Text>Deck</Text>
         <Text>ID: {route.params.deckId}</Text>

@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 const HomeScreen = ({navigation}) => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <CustomStatusBar />
       <SafeAreaView>
         <Text>Home</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>

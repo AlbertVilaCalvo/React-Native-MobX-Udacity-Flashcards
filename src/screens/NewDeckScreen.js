@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 const NewDeckScreen = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <CustomStatusBar />
       <SafeAreaView>
         <Text>Create New Deck</Text>
         <TouchableOpacity>
