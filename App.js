@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React from 'react'
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,22 +15,22 @@ import {
   Text,
   StatusBar,
   Pressable,
-} from 'react-native';
+} from 'react-native'
 import {
   Header,
   LearnMoreLinks,
   Colors,
   DebugInstructions,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './src/screens/HomeScreen';
-import DeckDetailScreen from './src/screens/DeckDetailScreen';
-import NewDeckScreen from './src/screens/NewDeckScreen';
-import CustomStatusBar from './src/components/CustomStatusBar';
+} from 'react-native/Libraries/NewAppScreen'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import HomeScreen from './src/screens/HomeScreen'
+import DeckDetailScreen from './src/screens/DeckDetailScreen'
+import NewDeckScreen from './src/screens/NewDeckScreen'
+import CustomStatusBar from './src/components/CustomStatusBar'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 const App: () => React$Node = () => {
   return (
@@ -39,24 +39,24 @@ const App: () => React$Node = () => {
         initialRouteName="Home"
         screenOptions={{
           headerTintColor: 'white',
-          headerStyle: {backgroundColor: 'tomato'},
+          headerStyle: { backgroundColor: 'tomato' },
         }}>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({navigation, route}) => ({
+          options={({ navigation, route }) => ({
             title: 'Flashcards',
             headerRight: () => (
               <Pressable
                 onPress={() => navigation.navigate('NewDeck')}
-                style={({pressed}) => [
+                style={({ pressed }) => [
                   {
                     backgroundColor: pressed ? '#ff3814' : 'transparent',
                     padding: 10,
                     borderRadius: 4,
                   },
                 ]}>
-                <Text style={{color: 'white'}}>Create New Deck</Text>
+                <Text style={{ color: 'white' }}>Create New Deck</Text>
               </Pressable>
             ),
           })}
@@ -65,17 +65,17 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="DeckDetail"
           component={DeckDetailScreen}
-          options={{title: 'Deck Detail', headerBackTitle: 'Home'}}
+          options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
         />
         <Stack.Screen
           name="NewDeck"
           component={NewDeckScreen}
-          options={{title: 'Create New Deck', headerBackTitle: 'Home'}}
+          options={{ title: 'Create New Deck', headerBackTitle: 'Home' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-};
+  )
+}
 
 const WelcomeScreen = () => {
   return (
@@ -122,8 +122,8 @@ const WelcomeScreen = () => {
         </ScrollView>
       </SafeAreaView>
     </>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -162,6 +162,6 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
-});
+})
 
-export default App;
+export default App

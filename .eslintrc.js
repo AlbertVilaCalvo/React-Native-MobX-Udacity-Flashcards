@@ -11,4 +11,4 @@ module.exports = {
     'no-trailing-spaces': 'off',
     semi: 'off',
   },
-};
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
-import CustomStatusBar from '../components/CustomStatusBar';
+import React from 'react'
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import CustomStatusBar from '../components/CustomStatusBar'
 
 const NewDeckScreen = () => {
   return (
@@ -13,7 +13,7 @@ const NewDeckScreen = () => {
         </TouchableOpacity>
       </SafeAreaView>
     </>
-  );
-};
+  )
+}
 
-export default NewDeckScreen;
+export default NewDeckScreen

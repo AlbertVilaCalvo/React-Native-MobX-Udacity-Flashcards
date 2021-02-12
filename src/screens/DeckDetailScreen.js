@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
-import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
-import CustomStatusBar from '../components/CustomStatusBar';
+import React, { useEffect } from 'react'
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import CustomStatusBar from '../components/CustomStatusBar'
 
-const DeckDetailScreen = ({route, navigation}) => {
+const DeckDetailScreen = ({ route, navigation }) => {
   const deleteDeck = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
 
   useEffect(() => {
-    navigation.setOptions({title: 'TODO'});
-  }, [navigation]);
+    navigation.setOptions({ title: 'TODO' })
+  }, [navigation])
 
   return (
     <>
@@ -22,7 +22,7 @@ const DeckDetailScreen = ({route, navigation}) => {
         </TouchableOpacity>
       </SafeAreaView>
     </>
-  );
-};
+  )
+}
 
-export default DeckDetailScreen;
+export default DeckDetailScreen
