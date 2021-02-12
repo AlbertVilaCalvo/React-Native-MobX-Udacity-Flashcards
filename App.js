@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  Pressable,
 } from 'react-native';
 import {
   Header,
@@ -37,7 +38,22 @@ const App: () => React$Node = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Flashcards'}}
+          options={({navigation, route}) => ({
+            title: 'Flashcards',
+            headerRight: () => (
+              <Pressable
+                onPress={() => navigation.navigate('NewDeck')}
+                style={({pressed}) => [
+                  {
+                    backgroundColor: pressed ? '#ff3814' : 'transparent',
+                    padding: 10,
+                    borderRadius: 4,
+                  },
+                ]}>
+                <Text style={{color: 'white'}}>Create New Deck</Text>
+              </Pressable>
+            ),
+          })}
         />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen
