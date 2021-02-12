@@ -25,6 +25,8 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
+import DeckDetailScreen from './src/screens/DeckDetailScreen';
+import NewDeckScreen from './src/screens/NewDeckScreen';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +40,16 @@ const App: () => React$Node = () => {
           options={{title: 'Flashcards'}}
         />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen
+          name="DeckDetail"
+          component={DeckDetailScreen}
+          options={{title: 'Deck Detail'}}
+        />
+        <Stack.Screen
+          name="NewDeck"
+          component={NewDeckScreen}
+          options={{title: 'Create New Deck'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
