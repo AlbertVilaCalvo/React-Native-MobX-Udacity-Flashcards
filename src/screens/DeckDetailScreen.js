@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import useDeck from '../decks/useDeck'
+import sharedStyles from '../styles/sharedStyles'
 
 const DeckDetailScreen = ({ route, navigation }) => {
   const deckId = route.params.deckId
@@ -14,7 +15,13 @@ const DeckDetailScreen = ({ route, navigation }) => {
   }, [deck, navigation])
 
   if (deck == null) {
-    return <Text>Deck with id {deckId} does not exist.</Text>
+    return (
+      <SafeAreaView style={sharedStyles.containerCentered}>
+        <Text style={sharedStyles.notFoundText}>
+          Deck with id {deckId} does not exist.
+        </Text>
+      </SafeAreaView>
+    )
   }
 
   const deleteDeck = () => {

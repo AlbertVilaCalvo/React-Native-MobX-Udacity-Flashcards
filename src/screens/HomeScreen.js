@@ -11,13 +11,16 @@ import {
 import CustomStatusBar from '../components/CustomStatusBar'
 import { useNavigation } from '@react-navigation/native'
 import useDecks from '../decks/useDecks'
+import sharedStyles from '../styles/sharedStyles'
 
 const HomeScreen = ({ navigation }) => {
   const decks = useDecks()
   if (decks.length === 0) {
     return (
-      <SafeAreaView style={styles.containerCentered}>
-        <Text style={styles.noDecksText}>You don't have any decks yet.</Text>
+      <SafeAreaView style={sharedStyles.containerCentered}>
+        <Text style={[sharedStyles.notFoundText, styles.noDecksText]}>
+          You don't have any decks yet.
+        </Text>
         <Button
           title="Create one!"
           onPress={() => navigation.navigate('NewDeck')}
@@ -64,13 +67,7 @@ const DeckListItem = ({ item }) => {
 }
 
 const styles = StyleSheet.create({
-  containerCentered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   noDecksText: {
-    fontSize: 18,
     marginBottom: 16,
   },
   container: {
