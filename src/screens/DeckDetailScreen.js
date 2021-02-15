@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
-import useDeck from '../decks/useDeck'
+import { observer } from 'mobx-react-lite'
+import useDeckStore from '../decks/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 
-const DeckDetailScreen = ({ route, navigation }) => {
+const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckId = route.params.deckId
-  const deck = useDeck(deckId)
+  const deckStore = useDeckStore()
+  const deck = deckStore.getDeck(deckId)
 
   useEffect(() => {
     if (deck !== null) {
@@ -25,6 +27,7 @@ const DeckDetailScreen = ({ route, navigation }) => {
   }
 
   const deleteDeck = () => {
+    deckStore.removeDeck(deckId)
     navigation.goBack()
   }
 
@@ -40,6 +43,6 @@ const DeckDetailScreen = ({ route, navigation }) => {
       </SafeAreaView>
     </>
   )
-}
+})
 
 export default DeckDetailScreen

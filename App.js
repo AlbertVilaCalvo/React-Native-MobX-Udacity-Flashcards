@@ -13,7 +13,6 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,
   Pressable,
 } from 'react-native'
 import {
@@ -23,6 +22,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import DeckStoreContext from './src/decks/DeckStoreContext'
+import deckStore from './src/decks/DeckStore'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './src/screens/HomeScreen'
@@ -34,46 +35,48 @@ const Stack = createStackNavigator()
 
 const App: () => React$Node = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerTintColor: 'white',
-          headerStyle: { backgroundColor: 'tomato' },
-        }}>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={({ navigation, route }) => ({
-            title: 'Flashcards',
-            headerRight: () => (
-              <Pressable
-                onPress={() => navigation.navigate('NewDeck')}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? '#ff3814' : 'transparent',
-                    padding: 10,
-                    borderRadius: 4,
-                  },
-                ]}>
-                <Text style={{ color: 'white' }}>Create New Deck</Text>
-              </Pressable>
-            ),
-          })}
-        />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen
-          name="DeckDetail"
-          component={DeckDetailScreen}
-          options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
-        />
-        <Stack.Screen
-          name="NewDeck"
-          component={NewDeckScreen}
-          options={{ title: 'Create New Deck', headerBackTitle: 'Home' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <DeckStoreContext.Provider value={deckStore}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: 'tomato' },
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={({ navigation, route }) => ({
+              title: 'Flashcards',
+              headerRight: () => (
+                <Pressable
+                  onPress={() => navigation.navigate('NewDeck')}
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed ? '#ff3814' : 'transparent',
+                      padding: 10,
+                      borderRadius: 4,
+                    },
+                  ]}>
+                  <Text style={{ color: 'white' }}>Create New Deck</Text>
+                </Pressable>
+              ),
+            })}
+          />
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen
+            name="DeckDetail"
+            component={DeckDetailScreen}
+            options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
+          />
+          <Stack.Screen
+            name="NewDeck"
+            component={NewDeckScreen}
+            options={{ title: 'Create New Deck', headerBackTitle: 'Home' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </DeckStoreContext.Provider>
   )
 }
 

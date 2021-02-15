@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { SafeAreaView, TextInput, StyleSheet, Button } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { useNavigation } from '@react-navigation/native'
+import useDeckStore from '../decks/useDeckStore'
 
 const NewDeckScreen = () => {
   const navigation = useNavigation()
+  const deckStore = useDeckStore()
   const [input, setInput] = useState('')
 
   const onPress = () => {
     navigation.goBack()
+    deckStore.addDeck(input)
   }
 
   return (

@@ -10,11 +10,14 @@ import {
 } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { useNavigation } from '@react-navigation/native'
-import useDecks from '../decks/useDecks'
+import { observer } from 'mobx-react-lite'
+import useDeckStore from '../decks/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 
-const HomeScreen = ({ navigation }) => {
-  const decks = useDecks()
+const HomeScreen = observer(({ navigation }) => {
+  const deckStore = useDeckStore()
+  const decks = deckStore.decks
+
   if (decks.length === 0) {
     return (
       <SafeAreaView style={sharedStyles.containerCentered}>
@@ -49,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
       </SafeAreaView>
     </>
   )
-}
+})
 
 export default HomeScreen
 
