@@ -5,6 +5,11 @@ React Native project of the [Udacity React Nanodegree](https://www.udacity.com/c
 This project was created with `npx react-native init UdacityFlashcards`.
 
 
+## Start bundler
+
+`npx react-native start`
+
+
 ## Run instructions for iOS
 
 `npx react-native run-ios`
@@ -38,4 +43,4 @@ or
 
 - Android: Press Cmd or Ctrl + M or shake your device.
 
-- iOS: Press Cmd + D or shake your device.
+- iOS: Press Cmd + D or shake your device (Cmd + Ctrl + Z).
