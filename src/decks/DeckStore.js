@@ -1,4 +1,5 @@
 import { action, autorun, makeObservable, observable } from 'mobx'
+import Deck from './Deck'
 
 class DeckStore {
   decks = []
@@ -13,10 +14,7 @@ class DeckStore {
   }
 
   addDeck(name) {
-    this.decks.push({
-      id: randomId(),
-      name,
-    })
+    this.decks.push(new Deck(name))
   }
 
   removeDeck(id) {
@@ -34,11 +32,3 @@ class DeckStore {
 const deckStore = new DeckStore()
 
 export default deckStore
-
-// From https://stackoverflow.com/a/38872723/4034572
-function randomId() {
-  return Math.random()
-    .toString(36)
-    .replace(/[^a-z]+/g, '')
-    .substr(2, 10)
-}
