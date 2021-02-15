@@ -17,8 +17,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       <CustomStatusBar />
-      <SafeAreaView>
-        <Text>Home</Text>
+      <SafeAreaView style={styles.container}>
         <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
           <Text>Welcome</Text>
         </TouchableOpacity>
@@ -30,6 +29,7 @@ const HomeScreen = ({ navigation }) => {
           data={decks}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <DeckListItem item={item} />}
+          style={styles.deckList}
         />
       </SafeAreaView>
     </>
@@ -52,6 +52,12 @@ const DeckListItem = ({ item }) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  deckList: {
+    flex: 1,
+  },
   deckListItemContainer: {
     alignSelf: 'stretch',
     padding: 20,
