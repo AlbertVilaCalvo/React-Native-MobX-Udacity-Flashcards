@@ -2,6 +2,7 @@ import React from 'react'
 import {
   SafeAreaView,
   Text,
+  Button,
   TouchableOpacity,
   FlatList,
   Pressable,
@@ -13,6 +14,17 @@ import useDecks from '../decks/useDecks'
 
 const HomeScreen = ({ navigation }) => {
   const decks = useDecks()
+  if (decks.length === 0) {
+    return (
+      <SafeAreaView style={styles.containerCentered}>
+        <Text style={styles.noDecksText}>You don't have any decks yet.</Text>
+        <Button
+          title="Create one!"
+          onPress={() => navigation.navigate('NewDeck')}
+        />
+      </SafeAreaView>
+    )
+  }
 
   return (
     <>
@@ -52,6 +64,15 @@ const DeckListItem = ({ item }) => {
 }
 
 const styles = StyleSheet.create({
+  containerCentered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noDecksText: {
+    fontSize: 18,
+    marginBottom: 16,
+  },
   container: {
     flex: 1,
   },
