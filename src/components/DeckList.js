@@ -2,6 +2,7 @@ import React from 'react'
 import { FlatList, Pressable, StyleSheet, Text } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import { useNavigation } from '@react-navigation/native'
+import sharedStyles from '../styles/sharedStyles'
 
 export default function DeckList({ decks }) {
   return (
@@ -21,8 +22,8 @@ const DeckListItem = observer(({ deck }) => {
     <Pressable
       onPress={() => navigation.navigate('DeckDetail', { deckId: deck.id })}
       style={styles.deckListItemContainer}>
-      <Text style={styles.deckListItemText}>{deck.name}</Text>
-      <Text>{deck.cardCountFormatted}</Text>
+      <Text style={[sharedStyles.textLarge, styles.textName]}>{deck.name}</Text>
+      <Text style={styles.textCount}>{deck.cardCountFormatted}</Text>
       <Text>{deck.id}</Text>
     </Pressable>
   )
@@ -41,9 +42,14 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderRadius: 4,
   },
-  deckListItemText: {
+  textName: {
     alignSelf: 'center',
     color: 'white',
-    fontSize: 26,
+  },
+  textCount: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 18,
+    marginTop: 10,
   },
 })

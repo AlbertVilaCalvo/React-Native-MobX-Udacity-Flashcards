@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, Text, Button, TouchableOpacity } from 'react-native'
+import {
+  SafeAreaView,
+  Text,
+  Button,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
@@ -35,9 +41,14 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   return (
     <>
       <CustomStatusBar />
-      <SafeAreaView>
-        <Text>ID: {deckId}</Text>
-        <Text>{deck.cardCountFormatted}</Text>
+      <SafeAreaView
+        style={[
+          sharedStyles.containerPadding,
+          sharedStyles.containerCenteredVertical,
+        ]}>
+        <Text style={sharedStyles.textLarge}>{deck.name}</Text>
+        <Text style={styles.bottomMargin}>ID: {deckId}</Text>
+        <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
         <Button
           title="Add Card"
           onPress={() => navigation.navigate('NewCard', { deckId })}
@@ -51,3 +62,9 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
 })
 
 export default DeckDetailScreen
+
+const styles = StyleSheet.create({
+  bottomMargin: {
+    marginBottom: 20,
+  },
+})

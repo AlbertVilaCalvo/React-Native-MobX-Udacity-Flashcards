@@ -15,6 +15,10 @@ const sharedStyles = StyleSheet.create({
     fontSize: 18,
   },
   textInput: { height: 40 },
+  textLarge: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
 })
 
 export default sharedStyles
