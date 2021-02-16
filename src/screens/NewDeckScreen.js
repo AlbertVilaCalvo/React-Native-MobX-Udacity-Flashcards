@@ -11,8 +11,8 @@ const NewDeckScreen = () => {
   const [input, setInput] = useState('')
 
   const onPress = () => {
-    navigation.goBack()
-    deckStore.addDeck(input)
+    const newDeck = deckStore.addDeck(input)
+    navigation.navigate('DeckDetail', { deckId: newDeck.id })
   }
 
   return (

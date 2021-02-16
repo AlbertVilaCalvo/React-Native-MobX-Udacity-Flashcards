@@ -14,7 +14,9 @@ class DeckStore {
   }
 
   addDeck(name) {
-    this.decks.push(new Deck(name))
+    const newDeck = new Deck(name)
+    this.decks.push(newDeck)
+    return newDeck
   }
 
   removeDeck(id) {

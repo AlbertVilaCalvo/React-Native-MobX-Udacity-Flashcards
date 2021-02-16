@@ -50,6 +50,7 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
         <Button
           title="Start Quiz"
           onPress={() => navigation.navigate('Quiz', { deckId })}
+          disabled={deck.cardCount === 0}
         />
         <TouchableOpacity onPress={deleteDeck}>
           <Text>Delete Deck</Text>
