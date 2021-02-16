@@ -12,8 +12,8 @@ import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
-  const deckId = route.params.deckId
   const deckStore = useDeckStore()
+  const deckId = route.params.deckId
   const deck = deckStore.getDeck(deckId)
 
   useEffect(() => {
@@ -52,6 +52,10 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
         <Button
           title="Add Card"
           onPress={() => navigation.navigate('NewCard', { deckId })}
+        />
+        <Button
+          title="Start Quiz"
+          onPress={() => navigation.navigate('Quiz', { deckId })}
         />
         <TouchableOpacity onPress={deleteDeck}>
           <Text>Delete Deck</Text>

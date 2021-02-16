@@ -31,6 +31,7 @@ import DeckDetailScreen from './src/screens/DeckDetailScreen'
 import NewDeckScreen from './src/screens/NewDeckScreen'
 import CustomStatusBar from './src/components/CustomStatusBar'
 import NewCardScreen from './src/screens/NewCardScreen'
+import QuizScreen from './src/screens/QuizScreen'
 
 const Stack = createStackNavigator()
 
@@ -70,6 +71,7 @@ const App: () => React$Node = () => {
             component={DeckDetailScreen}
             options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
           />
+          <Stack.Screen name="Quiz" component={QuizScreen} />
           <Stack.Screen
             name="NewDeck"
             component={NewDeckScreen}
