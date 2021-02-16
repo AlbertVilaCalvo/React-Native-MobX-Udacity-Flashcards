@@ -41,8 +41,8 @@ const HomeScreen = observer(({ navigation }) => {
         </TouchableOpacity>
         <FlatList
           data={decks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <DeckListItem item={item} />}
+          keyExtractor={(deck) => deck.id}
+          renderItem={({ item }) => <DeckListItem deck={item} />}
           style={styles.deckList}
         />
       </SafeAreaView>
@@ -52,18 +52,19 @@ const HomeScreen = observer(({ navigation }) => {
 
 export default HomeScreen
 
-const DeckListItem = ({ item }) => {
+const DeckListItem = observer(({ deck }) => {
   const navigation = useNavigation()
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('DeckDetail', { deckId: item.id })}
+      onPress={() => navigation.navigate('DeckDetail', { deckId: deck.id })}
       style={styles.deckListItemContainer}>
-      <Text style={styles.deckListItemText}>{item.name}</Text>
-      <Text>{item.id}</Text>
+      <Text style={styles.deckListItemText}>{deck.name}</Text>
+      <Text>{deck.cardCountFormatted}</Text>
+      <Text>{deck.id}</Text>
     </Pressable>
   )
-}
+})
 
 const styles = StyleSheet.create({
   noDecksText: {

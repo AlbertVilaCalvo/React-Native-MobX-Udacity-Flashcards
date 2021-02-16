@@ -1,10 +1,31 @@
+import { action, computed, makeObservable, observable } from 'mobx'
+
 export default class Deck {
   id // string, immutable
-  name // string
+  name // string, immutable
+  cards = [] // Card[], mutable
 
   constructor(name) {
     this.id = randomId()
     this.name = name
+    makeObservable(this, {
+      cards: observable,
+      cardCount: computed,
+      cardCountFormatted: computed,
+      addCard: action,
+    })
+  }
+
+  get cardCount() {
+    return this.cards.length
+  }
+
+  get cardCountFormatted() {
+    return this.cards.length === 1 ? '1 card' : this.cards.length + ' cards'
+  }
+
+  addCard(card) {
+    this.cards.push(card)
   }
 }
 

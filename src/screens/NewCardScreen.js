@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
 import { Button, SafeAreaView, TextInput, StyleSheet } from 'react-native'
 import sharedStyles from '../styles/sharedStyles'
+import useDeckStore from '../deck/useDeckStore'
+import { Card } from '../deck/Card'
 
-const NewCardScreen = () => {
+const NewCardScreen = ({ route, navigation }) => {
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
 
-  const onPress = () => {}
+  const deckStore = useDeckStore()
+  const deckId = route.params.deckId
+  const deck = deckStore.getDeck(deckId)
+
+  const onPress = () => {
+    deck.addCard(new Card(question, answer))
+    navigation.goBack()
+  }
 
   return (
     <SafeAreaView

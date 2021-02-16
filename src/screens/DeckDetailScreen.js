@@ -37,9 +37,10 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
       <CustomStatusBar />
       <SafeAreaView>
         <Text>ID: {deckId}</Text>
+        <Text>{deck.cardCountFormatted}</Text>
         <Button
           title="Add Card"
-          onPress={() => navigation.navigate('NewCard')}
+          onPress={() => navigation.navigate('NewCard', { deckId })}
         />
         <TouchableOpacity onPress={deleteDeck}>
           <Text>Delete Deck</Text>
