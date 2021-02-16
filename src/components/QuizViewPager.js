@@ -6,18 +6,19 @@ import { useNavigation } from '@react-navigation/native'
 const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
 
+const initialCardStates = (cardCount) =>
+  Array(cardCount).fill({ showAnswer: false, answer: null })
+
 const QuizViewPager = ({ deck }) => {
   const cardCount = deck.cards.length
 
-  const viewPager = useRef()
+  const [cardStates, setCardStates] = useState(initialCardStates(cardCount))
 
+  const viewPager = useRef()
   const onReset = useCallback(() => {
     viewPager.current.setPage(0)
-  }, [])
-
-  const [cardStates, setCardStates] = useState(
-    Array(cardCount).fill({ showAnswer: false, answer: null }),
-  )
+    setCardStates(initialCardStates(cardCount))
+  }, [cardCount])
 
   const onShowAnswer = useCallback((index) => {
     setCardStates((states) => {
@@ -68,6 +69,7 @@ const QuizViewPager = ({ deck }) => {
           )}
         </View>
       ))}
+
       <View
         style={styles.pageContainer}
         collapsable={false}
