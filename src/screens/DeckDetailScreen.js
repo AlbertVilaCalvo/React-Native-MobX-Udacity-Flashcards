@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { observer } from 'mobx-react-lite'
-import useDeckStore from '../decks/useDeckStore'
+import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {

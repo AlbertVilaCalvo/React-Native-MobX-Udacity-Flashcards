@@ -22,8 +22,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
-import DeckStoreContext from './src/decks/DeckStoreContext'
-import deckStore from './src/decks/DeckStore'
+import DeckStoreContext from './src/deck/DeckStoreContext'
+import deckStore from './src/deck/DeckStore'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './src/screens/HomeScreen'

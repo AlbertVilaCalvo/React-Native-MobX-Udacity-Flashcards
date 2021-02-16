@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { SafeAreaView, TextInput, StyleSheet, Button } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { useNavigation } from '@react-navigation/native'
-import useDeckStore from '../decks/useDeckStore'
+import useDeckStore from '../deck/useDeckStore'
 
 const NewDeckScreen = () => {
   const navigation = useNavigation()

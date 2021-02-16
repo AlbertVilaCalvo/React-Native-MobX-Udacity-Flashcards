@@ -11,7 +11,7 @@ import {
 import CustomStatusBar from '../components/CustomStatusBar'
 import { useNavigation } from '@react-navigation/native'
 import { observer } from 'mobx-react-lite'
-import useDeckStore from '../decks/useDeckStore'
+import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 
 const HomeScreen = observer(({ navigation }) => {
