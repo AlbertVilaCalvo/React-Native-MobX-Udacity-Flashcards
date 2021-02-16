@@ -7,6 +7,8 @@ const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
 
 const QuizViewPager = ({ deck }) => {
+  const cardCount = deck.cards.length
+
   const viewPager = useRef()
 
   const onReset = useCallback(() => {
@@ -14,7 +16,7 @@ const QuizViewPager = ({ deck }) => {
   }, [])
 
   const [cardStates, setCardStates] = useState(
-    Array(deck.cards.length).fill({ showAnswer: false, answer: null }),
+    Array(cardCount).fill({ showAnswer: false, answer: null }),
   )
 
   const onShowAnswer = useCallback((index) => {
@@ -41,16 +43,29 @@ const QuizViewPager = ({ deck }) => {
       showPageIndicator={true}>
       {deck.cards.map((card, index) => (
         <View style={styles.pageContainer} collapsable={false} key={index}>
-          <CardPage
-            card={card}
-            index={index}
-            cardCount={deck.cards.length}
-            showAnswer={cardStates[index].showAnswer}
-            onShowAnswer={() => onShowAnswer(index)}
-            onSetAnswerCorrect={() => onSetAnswer(index, ANSWER_CORRECT)}
-            onSetAnswerIncorrect={() => onSetAnswer(index, ANSWER_INCORRECT)}
-            answer={cardStates[index].answer}
-          />
+          <Text>
+            Question {index + 1}/{cardCount}
+          </Text>
+          <Text>{card.question}</Text>
+          {cardStates[index].showAnswer ? (
+            <Text>{card.answer}</Text>
+          ) : (
+            <Button title="Show Answer" onPress={() => onShowAnswer(index)} />
+          )}
+          {cardStates[index].answer === null ? (
+            <>
+              <Button
+                title="Correct"
+                onPress={() => onSetAnswer(index, ANSWER_CORRECT)}
+              />
+              <Button
+                title="Incorrect"
+                onPress={() => onSetAnswer(index, ANSWER_INCORRECT)}
+              />
+            </>
+          ) : (
+            <Text>Your answer: {cardStates[index].answer}</Text>
+          )}
         </View>
       ))}
       <View
@@ -60,41 +75,6 @@ const QuizViewPager = ({ deck }) => {
         <SummaryPage onReset={onReset} />
       </View>
     </ViewPager>
-  )
-}
-
-const CardPage = ({
-  card,
-  index,
-  cardCount,
-  showAnswer,
-  onShowAnswer,
-  onSetAnswerCorrect,
-  onSetAnswerIncorrect,
-  answer,
-}) => {
-  return (
-    <>
-      <Text>
-        Question {index + 1}/{cardCount}
-      </Text>
-      <Text>{card.question}</Text>
-
-      {showAnswer ? (
-        <Text>{card.answer}</Text>
-      ) : (
-        <Button title="Show Answer" onPress={onShowAnswer} />
-      )}
-
-      {answer === null ? (
-        <>
-          <Button title="Correct" onPress={onSetAnswerCorrect} />
-          <Button title="Incorrect" onPress={onSetAnswerIncorrect} />
-        </>
-      ) : (
-        <Text>Your answer: {answer}</Text>
-      )}
-    </>
   )
 }
 
