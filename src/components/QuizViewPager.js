@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
@@ -10,6 +10,18 @@ const QuizViewPager = ({ deck }) => {
     viewPager.current.setPage(0)
   }, [])
 
+  const [cardStates, setCardStates] = useState(
+    Array(deck.cards.length).fill({ showAnswer: false, answer: null }),
+  )
+
+  const onShowAnswer = useCallback((index) => {
+    setCardStates((states) => {
+      return states.map((state, i) =>
+        i === index ? { ...states[index], showAnswer: true } : state,
+      )
+    })
+  }, [])
+
   return (
     <ViewPager
       ref={viewPager}
@@ -18,7 +30,13 @@ const QuizViewPager = ({ deck }) => {
       showPageIndicator={true}>
       {deck.cards.map((card, index) => (
         <View style={styles.pageContainer} collapsable={false} key={index}>
-          <CardPage card={card} index={index} cardCount={deck.cards.length} />
+          <CardPage
+            card={card}
+            index={index}
+            cardCount={deck.cards.length}
+            showAnswer={cardStates[index].showAnswer}
+            onShowAnswer={() => onShowAnswer(index)}
+          />
         </View>
       ))}
       <View
@@ -31,8 +49,7 @@ const QuizViewPager = ({ deck }) => {
   )
 }
 
-const CardPage = ({ card, index, cardCount }) => {
-  const answerPress = () => {}
+const CardPage = ({ card, index, cardCount, showAnswer, onShowAnswer }) => {
   const correctPress = () => {}
   const incorrectPress = () => {}
 
@@ -42,7 +59,12 @@ const CardPage = ({ card, index, cardCount }) => {
         Question {index + 1}/{cardCount}
       </Text>
       <Text>{card.question}</Text>
-      <Button title="Show Answer" onPress={answerPress} />
+      {showAnswer ? (
+        <Text>{card.answer}</Text>
+      ) : (
+        <Button title="Show Answer" onPress={onShowAnswer} />
+      )}
+
       <Button title="Correct" onPress={correctPress} />
       <Button title="Incorrect" onPress={incorrectPress} />
     </>
