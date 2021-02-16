@@ -35,7 +35,6 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
     <>
       <CustomStatusBar />
       <SafeAreaView>
-        <Text>Deck</Text>
         <Text>ID: {deckId}</Text>
         <TouchableOpacity onPress={deleteDeck}>
           <Text>Delete Deck</Text>

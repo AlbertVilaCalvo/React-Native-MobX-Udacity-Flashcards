@@ -39,10 +39,6 @@ const HomeScreen = observer(({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
           <Text>Welcome</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('DeckDetail', { deckId: '1' })}>
-          <Text>Open Deck Detail</Text>
-        </TouchableOpacity>
         <FlatList
           data={decks}
           keyExtractor={(item) => item.id}
