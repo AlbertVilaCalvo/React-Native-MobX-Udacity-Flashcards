@@ -3,6 +3,9 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
 
+const ANSWER_CORRECT = 'correct'
+const ANSWER_INCORRECT = 'incorrect'
+
 const QuizViewPager = ({ deck }) => {
   const viewPager = useRef()
 
@@ -22,6 +25,14 @@ const QuizViewPager = ({ deck }) => {
     })
   }, [])
 
+  const onSetAnswer = useCallback((index, answer) => {
+    setCardStates((states) => {
+      return states.map((state, i) =>
+        i === index ? { ...states[index], answer } : state,
+      )
+    })
+  }, [])
+
   return (
     <ViewPager
       ref={viewPager}
@@ -36,6 +47,9 @@ const QuizViewPager = ({ deck }) => {
             cardCount={deck.cards.length}
             showAnswer={cardStates[index].showAnswer}
             onShowAnswer={() => onShowAnswer(index)}
+            onSetAnswerCorrect={() => onSetAnswer(index, ANSWER_CORRECT)}
+            onSetAnswerIncorrect={() => onSetAnswer(index, ANSWER_INCORRECT)}
+            answer={cardStates[index].answer}
           />
         </View>
       ))}
@@ -49,24 +63,37 @@ const QuizViewPager = ({ deck }) => {
   )
 }
 
-const CardPage = ({ card, index, cardCount, showAnswer, onShowAnswer }) => {
-  const correctPress = () => {}
-  const incorrectPress = () => {}
-
+const CardPage = ({
+  card,
+  index,
+  cardCount,
+  showAnswer,
+  onShowAnswer,
+  onSetAnswerCorrect,
+  onSetAnswerIncorrect,
+  answer,
+}) => {
   return (
     <>
       <Text>
         Question {index + 1}/{cardCount}
       </Text>
       <Text>{card.question}</Text>
+
       {showAnswer ? (
         <Text>{card.answer}</Text>
       ) : (
         <Button title="Show Answer" onPress={onShowAnswer} />
       )}
 
-      <Button title="Correct" onPress={correctPress} />
-      <Button title="Incorrect" onPress={incorrectPress} />
+      {answer === null ? (
+        <>
+          <Button title="Correct" onPress={onSetAnswerCorrect} />
+          <Button title="Incorrect" onPress={onSetAnswerIncorrect} />
+        </>
+      ) : (
+        <Text>Your answer: {answer}</Text>
+      )}
     </>
   )
 }
