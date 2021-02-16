@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView, Text, Button, TouchableOpacity } from 'react-native'
 import CustomStatusBar from '../components/CustomStatusBar'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
@@ -18,7 +18,8 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
 
   if (deck == null) {
     return (
-      <SafeAreaView style={sharedStyles.containerCentered}>
+      <SafeAreaView
+        style={[sharedStyles.containerCentered, sharedStyles.containerPadding]}>
         <Text style={sharedStyles.notFoundText}>
           Deck with id {deckId} does not exist.
         </Text>
@@ -36,6 +37,10 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
       <CustomStatusBar />
       <SafeAreaView>
         <Text>ID: {deckId}</Text>
+        <Button
+          title="Add Card"
+          onPress={() => navigation.navigate('NewCard')}
+        />
         <TouchableOpacity onPress={deleteDeck}>
           <Text>Delete Deck</Text>
         </TouchableOpacity>
