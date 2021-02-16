@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import useDeckStore from '../deck/useDeckStore'
 import DeckNotFound from '../components/DeckNotFound'
 import ViewPager from '@react-native-community/viewpager'
+import { useNavigation } from '@react-navigation/native'
 
 const QuizScreen = ({ route, navigation }) => {
   const deckStore = useDeckStore()
@@ -16,6 +17,12 @@ const QuizScreen = ({ route, navigation }) => {
     }
   }, [deck, navigation])
 
+  const viewPager = useRef()
+
+  const onReset = useCallback(() => {
+    viewPager.current.setPage(0)
+  }, [])
+
   if (deck === null) {
     return <DeckNotFound deckId={deckId} />
   }
@@ -23,11 +30,22 @@ const QuizScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Text>Quiz</Text>
-      <ViewPager initialPage={0} style={styles.viewPager}>
+      <ViewPager
+        ref={viewPager}
+        initialPage={0}
+        style={styles.viewPager}
+        showPageIndicator={true}>
         {deck.cards.map((card, index) => (
-          <CardPage card={card} index={index} cardCount={deck.cards.length} />
+          <View style={styles.pageContainer} collapsable={false} key={index}>
+            <CardPage card={card} index={index} cardCount={deck.cards.length} />
+          </View>
         ))}
-        <SummaryPage index={deck.cards.length} />
+        <View
+          style={styles.pageContainer}
+          collapsable={false}
+          key={deck.cards.length}>
+          <SummaryPage onReset={onReset} />
+        </View>
       </ViewPager>
     </SafeAreaView>
   )
@@ -39,24 +57,31 @@ const CardPage = ({ card, index, cardCount }) => {
   const incorrectPress = () => {}
 
   return (
-    <View collapsable={false} key={index} style={styles.pageContainer}>
-      <Text>Question</Text>
+    <>
+      <Text>
+        Question {index + 1}/{cardCount}
+      </Text>
       <Text>{card.question}</Text>
       <Button title="Show Answer" onPress={answerPress} />
       <Button title="Correct" onPress={correctPress} />
       <Button title="Incorrect" onPress={incorrectPress} />
-      <Text>
-        {index + 1}/{cardCount}
-      </Text>
-    </View>
+    </>
   )
 }
 
-const SummaryPage = ({ index }) => {
+const SummaryPage = ({ onReset }) => {
+  const navigation = useNavigation()
+
+  const backPress = () => {
+    navigation.goBack()
+  }
+
   return (
-    <View collapsable={false} key={index} style={styles.pageContainer}>
+    <>
       <Text>Summary</Text>
-    </View>
+      <Button title="Restart Quiz" onPress={onReset} />
+      <Button title="Back to Deck" onPress={backPress} />
+    </>
   )
 }
 
