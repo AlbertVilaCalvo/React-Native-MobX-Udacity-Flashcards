@@ -10,6 +10,7 @@ import CustomStatusBar from '../components/CustomStatusBar'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
+import DeckNotFound from '../components/DeckNotFound'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckStore = useDeckStore()
@@ -22,15 +23,8 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
     }
   }, [deck, navigation])
 
-  if (deck == null) {
-    return (
-      <SafeAreaView
-        style={[sharedStyles.containerCentered, sharedStyles.containerPadding]}>
-        <Text style={sharedStyles.notFoundText}>
-          Deck with id {deckId} does not exist.
-        </Text>
-      </SafeAreaView>
-    )
+  if (deck === null) {
+    return <DeckNotFound deckId={deckId} />
   }
 
   const deleteDeck = () => {
