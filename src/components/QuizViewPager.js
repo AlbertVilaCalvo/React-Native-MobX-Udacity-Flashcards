@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
@@ -15,26 +15,26 @@ const QuizViewPager = ({ deck }) => {
   const [cardStates, setCardStates] = useState(initialCardStates(cardCount))
 
   const viewPager = useRef()
-  const onReset = useCallback(() => {
+  const onReset = () => {
     viewPager.current.setPage(0)
     setCardStates(initialCardStates(cardCount))
-  }, [cardCount])
+  }
 
-  const onShowAnswer = useCallback((index) => {
+  const onShowAnswer = (index) => {
     setCardStates((states) => {
       return states.map((state, i) =>
         i === index ? { ...states[index], showAnswer: true } : state,
       )
     })
-  }, [])
+  }
 
-  const onSetAnswer = useCallback((index, answer) => {
+  const onSetAnswer = (index, answer) => {
     setCardStates((states) => {
       return states.map((state, i) =>
         i === index ? { ...states[index], answer } : state,
       )
     })
-  }, [])
+  }
 
   return (
     <ViewPager
