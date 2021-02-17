@@ -74,22 +74,44 @@ const QuizViewPager = ({ deck }) => {
         style={styles.pageContainer}
         collapsable={false}
         key={deck.cards.length}>
-        <SummaryPage onReset={onReset} />
+        <SummaryPage onReset={onReset} cardStates={cardStates} />
       </View>
     </ViewPager>
   )
 }
 
-const SummaryPage = ({ onReset }) => {
+const SummaryPage = ({ cardStates, onReset }) => {
   const navigation = useNavigation()
 
   const backPress = () => {
     navigation.goBack()
   }
 
+  const isDone = cardStates.every((state) => state.answer !== null)
+
+  const totalAnswers = cardStates.length
+  const correctAnswers = cardStates.reduce(
+    (acc, state) => (state.answer === ANSWER_CORRECT ? acc + 1 : acc),
+    0,
+  )
+  const incorrectAnswers = totalAnswers - correctAnswers
+
   return (
     <>
       <Text>Summary</Text>
+      {isDone ? (
+        <>
+          <Text>Your score</Text>
+          <Text>
+            Correct: {correctAnswers}/{totalAnswers}
+          </Text>
+          <Text>
+            Incorrect: {incorrectAnswers}/{totalAnswers}
+          </Text>
+        </>
+      ) : (
+        <Text>You have not answered all questions yet.</Text>
+      )}
       <Button title="Restart Quiz" onPress={onReset} />
       <Button title="Back to Deck" onPress={backPress} />
     </>
