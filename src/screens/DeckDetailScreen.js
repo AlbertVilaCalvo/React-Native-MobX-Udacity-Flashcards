@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import DeckNotFound from '../components/DeckNotFound'
+import { TextTitle } from '../components/styled/text'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckStore = useDeckStore()
@@ -40,7 +41,7 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
           sharedStyles.containerPadding,
           sharedStyles.containerCenteredVertical,
         ]}>
-        <Text style={sharedStyles.textLarge}>{deck.name}</Text>
+        <TextTitle>{deck.name}</TextTitle>
         <Text style={styles.bottomMargin}>ID: {deckId}</Text>
         <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
         <Button

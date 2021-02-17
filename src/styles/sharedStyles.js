@@ -11,14 +11,7 @@ const sharedStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  notFoundText: {
-    fontSize: 18,
-  },
   textInput: { height: 40 },
-  textLarge: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
 })
 
 export default sharedStyles
