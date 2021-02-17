@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Text, Button, TouchableOpacity, StyleSheet, View } from 'react-native'
+import { Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import DeckNotFound from '../components/DeckNotFound'
+import CustomSafeAreaView from '../components/CustomSafeAreaView'
 import { TextTitle } from '../components/styled/text'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
@@ -27,11 +28,8 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   }
 
   return (
-    <View
-      style={[
-        sharedStyles.containerPadding,
-        sharedStyles.containerCenteredVertical,
-      ]}>
+    <CustomSafeAreaView
+      style={sharedStyles.containerCenterVerticalPaddingHorizontal}>
       <TextTitle>{deck.name}</TextTitle>
       <Text style={styles.bottomMargin}>ID: {deckId}</Text>
       <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
@@ -47,7 +45,7 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
       <TouchableOpacity onPress={deleteDeck}>
         <Text>Delete Deck</Text>
       </TouchableOpacity>
-    </View>
+    </CustomSafeAreaView>
   )
 })
 

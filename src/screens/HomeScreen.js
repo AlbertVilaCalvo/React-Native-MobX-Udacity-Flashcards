@@ -5,6 +5,7 @@ import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import DeckList from '../components/DeckList'
 import { TextBody } from '../components/styled/text'
+import CustomSafeAreaView from '../components/CustomSafeAreaView'
 
 const HomeScreen = observer(({ navigation }) => {
   const deckStore = useDeckStore()
@@ -12,7 +13,7 @@ const HomeScreen = observer(({ navigation }) => {
 
   if (decks.length === 0) {
     return (
-      <View style={sharedStyles.containerCentered}>
+      <CustomSafeAreaView style={sharedStyles.containerCentered}>
         <TextBody style={styles.noDecksText}>
           You don't have any decks yet.
         </TextBody>
@@ -20,17 +21,19 @@ const HomeScreen = observer(({ navigation }) => {
           title="Create one!"
           onPress={() => navigation.navigate('NewDeck')}
         />
-      </View>
+      </CustomSafeAreaView>
     )
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
-        <Text>Welcome</Text>
-      </TouchableOpacity>
-      <DeckList decks={decks} />
-    </View>
+    <CustomSafeAreaView>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+          <Text>Welcome</Text>
+        </TouchableOpacity>
+        <DeckList decks={decks} />
+      </View>
+    </CustomSafeAreaView>
   )
 })
 

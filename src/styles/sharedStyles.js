@@ -1,15 +1,21 @@
 import { StyleSheet } from 'react-native'
 
 const sharedStyles = StyleSheet.create({
-  containerPadding: { paddingHorizontal: 40, paddingVertical: 40 },
   containerCentered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  containerCenteredVertical: {
+  containerCenteredPaddingHorizontal: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
+  containerCenterVerticalPaddingHorizontal: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 40,
   },
   textInput: { height: 40 },
 })

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
+import { Text } from 'react-native'
 import useDeckStore from '../deck/useDeckStore'
 import DeckNotFound from '../components/DeckNotFound'
+import CustomSafeAreaView from '../components/CustomSafeAreaView'
 import QuizViewPager from '../components/QuizViewPager'
 
 const QuizScreen = ({ route, navigation }) => {
@@ -21,17 +22,11 @@ const QuizScreen = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <CustomSafeAreaView>
       <Text>Quiz</Text>
       <QuizViewPager deck={deck} />
-    </SafeAreaView>
+    </CustomSafeAreaView>
   )
 }
 
 export default QuizScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})

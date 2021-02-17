@@ -1,13 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
 import sharedStyles from '../styles/sharedStyles'
+import CustomSafeAreaView from './CustomSafeAreaView'
 import { TextBody } from './styled/text'
 
 export default function DeckNotFound({ deckId }) {
   return (
-    <View
-      style={[sharedStyles.containerCentered, sharedStyles.containerPadding]}>
+    <CustomSafeAreaView style={sharedStyles.containerCenteredPaddingHorizontal}>
       <TextBody>Deck with id {deckId} does not exist.</TextBody>
-    </View>
+    </CustomSafeAreaView>
   )
 }

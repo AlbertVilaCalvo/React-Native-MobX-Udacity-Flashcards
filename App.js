@@ -22,6 +22,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DeckStoreContext from './src/deck/DeckStoreContext'
 import deckStore from './src/deck/DeckStore'
 import { NavigationContainer } from '@react-navigation/native'
@@ -39,52 +40,54 @@ const Stack = createStackNavigator()
 const App: () => React$Node = () => {
   return (
     <DeckStoreContext.Provider value={deckStore}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerTintColor: 'white',
-            headerStyle: { backgroundColor: 'tomato' },
-          }}>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={({ navigation, route }) => ({
-              title: 'Flashcards',
-              headerRight: () => (
-                <Pressable
-                  onPress={() => navigation.navigate('NewDeck')}
-                  style={({ pressed }) => [
-                    {
-                      backgroundColor: pressed ? '#ff3814' : 'transparent',
-                      padding: 10,
-                      borderRadius: 4,
-                    },
-                  ]}>
-                  <Text style={{ color: 'white' }}>Create New Deck</Text>
-                </Pressable>
-              ),
-            })}
-          />
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          <Stack.Screen
-            name="DeckDetail"
-            component={DeckDetailScreen}
-            options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
-          />
-          <Stack.Screen name="Quiz" component={QuizScreen} />
-          <Stack.Screen
-            name="NewDeck"
-            component={NewDeckScreen}
-            options={{ title: 'Create New Deck', headerBackTitle: 'Home' }}
-          />
-          <Stack.Screen
-            name="NewCard"
-            component={NewCardScreen}
-            options={{ title: 'Add Card' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerTintColor: 'white',
+              headerStyle: { backgroundColor: 'tomato' },
+            }}>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={({ navigation, route }) => ({
+                title: 'Flashcards',
+                headerRight: () => (
+                  <Pressable
+                    onPress={() => navigation.navigate('NewDeck')}
+                    style={({ pressed }) => [
+                      {
+                        backgroundColor: pressed ? '#ff3814' : 'transparent',
+                        padding: 10,
+                        borderRadius: 4,
+                      },
+                    ]}>
+                    <Text style={{ color: 'white' }}>Create New Deck</Text>
+                  </Pressable>
+                ),
+              })}
+            />
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen
+              name="DeckDetail"
+              component={DeckDetailScreen}
+              options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
+            />
+            <Stack.Screen name="Quiz" component={QuizScreen} />
+            <Stack.Screen
+              name="NewDeck"
+              component={NewDeckScreen}
+              options={{ title: 'Create New Deck', headerBackTitle: 'Home' }}
+            />
+            <Stack.Screen
+              name="NewCard"
+              component={NewCardScreen}
+              options={{ title: 'Add Card' }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </DeckStoreContext.Provider>
   )
 }

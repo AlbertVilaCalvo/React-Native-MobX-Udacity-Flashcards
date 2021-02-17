@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { TextInput, Button, View } from 'react-native'
+import { TextInput, Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
+import CustomSafeAreaView from '../components/CustomSafeAreaView'
 
 const NewDeckScreen = () => {
   const navigation = useNavigation()
@@ -15,7 +16,7 @@ const NewDeckScreen = () => {
   }
 
   return (
-    <View style={sharedStyles.containerPadding}>
+    <CustomSafeAreaView style={sharedStyles.containerCenteredPaddingHorizontal}>
       <TextInput
         style={sharedStyles.textInput}
         placeholder="New Deck Name"
@@ -27,7 +28,7 @@ const NewDeckScreen = () => {
         disabled={input.trim() === ''}
         onPress={onPress}
       />
-    </View>
+    </CustomSafeAreaView>
   )
 }
 
