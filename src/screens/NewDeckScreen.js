@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, TextInput, Button } from 'react-native'
-import CustomStatusBar from '../components/CustomStatusBar'
+import { TextInput, Button, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -16,22 +15,19 @@ const NewDeckScreen = () => {
   }
 
   return (
-    <>
-      <CustomStatusBar />
-      <SafeAreaView style={sharedStyles.containerPadding}>
-        <TextInput
-          style={sharedStyles.textInput}
-          placeholder="New Deck Name"
-          onChangeText={(text) => setInput(text)}
-          defaultValue={input}
-        />
-        <Button
-          title="Create New Deck"
-          disabled={input.trim() === ''}
-          onPress={onPress}
-        />
-      </SafeAreaView>
-    </>
+    <View style={sharedStyles.containerPadding}>
+      <TextInput
+        style={sharedStyles.textInput}
+        placeholder="New Deck Name"
+        onChangeText={(text) => setInput(text)}
+        defaultValue={input}
+      />
+      <Button
+        title="Create New Deck"
+        disabled={input.trim() === ''}
+        onPress={onPress}
+      />
+    </View>
   )
 }
 

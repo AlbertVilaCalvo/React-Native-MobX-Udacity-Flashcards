@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react'
-import {
-  SafeAreaView,
-  Text,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native'
-import CustomStatusBar from '../components/CustomStatusBar'
+import { Text, Button, TouchableOpacity, StyleSheet, View } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -34,30 +27,27 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   }
 
   return (
-    <>
-      <CustomStatusBar />
-      <SafeAreaView
-        style={[
-          sharedStyles.containerPadding,
-          sharedStyles.containerCenteredVertical,
-        ]}>
-        <TextTitle>{deck.name}</TextTitle>
-        <Text style={styles.bottomMargin}>ID: {deckId}</Text>
-        <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
-        <Button
-          title="Add Card"
-          onPress={() => navigation.navigate('NewCard', { deckId })}
-        />
-        <Button
-          title="Start Quiz"
-          onPress={() => navigation.navigate('Quiz', { deckId })}
-          disabled={deck.cardCount === 0}
-        />
-        <TouchableOpacity onPress={deleteDeck}>
-          <Text>Delete Deck</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    </>
+    <View
+      style={[
+        sharedStyles.containerPadding,
+        sharedStyles.containerCenteredVertical,
+      ]}>
+      <TextTitle>{deck.name}</TextTitle>
+      <Text style={styles.bottomMargin}>ID: {deckId}</Text>
+      <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
+      <Button
+        title="Add Card"
+        onPress={() => navigation.navigate('NewCard', { deckId })}
+      />
+      <Button
+        title="Start Quiz"
+        onPress={() => navigation.navigate('Quiz', { deckId })}
+        disabled={deck.cardCount === 0}
+      />
+      <TouchableOpacity onPress={deleteDeck}>
+        <Text>Delete Deck</Text>
+      </TouchableOpacity>
+    </View>
   )
 })
 

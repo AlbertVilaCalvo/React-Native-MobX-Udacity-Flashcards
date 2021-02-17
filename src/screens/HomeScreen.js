@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  SafeAreaView,
-  Text,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native'
-import CustomStatusBar from '../components/CustomStatusBar'
+import { Text, Button, TouchableOpacity, StyleSheet, View } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -19,7 +12,7 @@ const HomeScreen = observer(({ navigation }) => {
 
   if (decks.length === 0) {
     return (
-      <SafeAreaView style={sharedStyles.containerCentered}>
+      <View style={sharedStyles.containerCentered}>
         <TextBody style={styles.noDecksText}>
           You don't have any decks yet.
         </TextBody>
@@ -27,20 +20,17 @@ const HomeScreen = observer(({ navigation }) => {
           title="Create one!"
           onPress={() => navigation.navigate('NewDeck')}
         />
-      </SafeAreaView>
+      </View>
     )
   }
 
   return (
-    <>
-      <CustomStatusBar />
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
-          <Text>Welcome</Text>
-        </TouchableOpacity>
-        <DeckList decks={decks} />
-      </SafeAreaView>
-    </>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+        <Text>Welcome</Text>
+      </TouchableOpacity>
+      <DeckList decks={decks} />
+    </View>
   )
 })
 

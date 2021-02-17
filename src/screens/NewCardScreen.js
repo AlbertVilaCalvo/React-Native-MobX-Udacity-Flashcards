@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, SafeAreaView, TextInput, StyleSheet } from 'react-native'
+import { Button, TextInput, StyleSheet, View } from 'react-native'
 import sharedStyles from '../styles/sharedStyles'
 import useDeckStore from '../deck/useDeckStore'
 import { Card } from '../deck/Card'
@@ -18,7 +18,7 @@ const NewCardScreen = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView
+    <View
       style={[
         sharedStyles.containerCenteredVertical,
         sharedStyles.containerPadding,
@@ -40,7 +40,7 @@ const NewCardScreen = ({ route, navigation }) => {
         disabled={question.trim() === '' || answer.trim() === ''}
         onPress={onPress}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
