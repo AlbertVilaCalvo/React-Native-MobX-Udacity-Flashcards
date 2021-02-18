@@ -35,6 +35,7 @@ import DeckDetailScreen from './src/screens/DeckDetailScreen'
 import NewDeckScreen from './src/screens/NewDeckScreen'
 import NewCardScreen from './src/screens/NewCardScreen'
 import QuizScreen from './src/screens/QuizScreen'
+import HeaderButton from './src/components/styled/HeaderButton'
 
 StatusBar.setBarStyle('dark-content', false)
 if (isAndroid) {
@@ -60,21 +61,10 @@ const App: () => React$Node = () => {
               options={({ navigation, route }) => ({
                 title: 'Flashcards',
                 headerRight: () => (
-                  <Pressable
+                  <HeaderButton
+                    text="New Deck"
                     onPress={() => navigation.navigate('NewDeck')}
-                    style={({ pressed }) => [
-                      {
-                        backgroundColor: pressed
-                          ? Color.primaryLight
-                          : 'transparent',
-                        paddingHorizontal: 8,
-                        paddingVertical: 6,
-                        marginRight: 5,
-                        borderRadius: Dimension.borderRadius,
-                      },
-                    ]}>
-                    <Text style={{ color: 'white' }}>New Deck</Text>
-                  </Pressable>
+                  />
                 ),
               })}
             />
