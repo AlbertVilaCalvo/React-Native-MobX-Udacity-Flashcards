@@ -22,6 +22,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import { Color } from './src/styles/Color'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DeckStoreContext from './src/deck/DeckStoreContext'
 import deckStore from './src/deck/DeckStore'
@@ -46,7 +47,7 @@ const App: () => React$Node = () => {
             initialRouteName="Home"
             screenOptions={{
               headerTintColor: 'white',
-              headerStyle: { backgroundColor: 'tomato' },
+              headerStyle: { backgroundColor: Color.primary },
             }}>
             <Stack.Screen
               name="Home"
@@ -58,7 +59,9 @@ const App: () => React$Node = () => {
                     onPress={() => navigation.navigate('NewDeck')}
                     style={({ pressed }) => [
                       {
-                        backgroundColor: pressed ? '#ff3814' : 'transparent',
+                        backgroundColor: pressed
+                          ? Color.primaryHighlight
+                          : 'transparent',
                         padding: 10,
                         borderRadius: 4,
                       },
