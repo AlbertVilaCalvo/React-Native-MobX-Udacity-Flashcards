@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Text } from 'react-native'
 import useDeckStore from '../deck/useDeckStore'
 import DeckNotFound from '../components/DeckNotFound'
@@ -10,7 +10,7 @@ const QuizScreen = ({ route, navigation }) => {
   const deckId = route.params.deckId
   const deck = deckStore.getDeck(deckId)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (deck !== null) {
       const title = `Quiz ${deck.name}`
       navigation.setOptions({ title })

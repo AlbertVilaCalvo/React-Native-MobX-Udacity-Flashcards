@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
@@ -13,7 +13,7 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckId = route.params.deckId
   const deck = deckStore.getDeck(deckId)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (deck !== null) {
       navigation.setOptions({ title: deck.name })
     }
