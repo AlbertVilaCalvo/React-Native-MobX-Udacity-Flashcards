@@ -1,9 +1,10 @@
 import React from 'react'
-import { Platform, Pressable, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import { Color } from '../../styles/Color'
 import { Dimension } from '../../styles/Dimension'
 import { TextBody } from './text'
 import PropTypes from 'prop-types'
+import { isAndroid } from '../../utils/platform'
 
 export default function CustomButton({
   text,
@@ -12,8 +13,7 @@ export default function CustomButton({
   disabled = false,
   ...rest
 }) {
-  const androidRipple =
-    Platform.OS === 'android' ? { android_ripple: { color: 'white' } } : {}
+  const androidRipple = isAndroid ? { android_ripple: { color: 'white' } } : {}
   return (
     <Pressable
       onPress={onPress}
@@ -25,8 +25,7 @@ export default function CustomButton({
         {
           backgroundColor: disabled
             ? Color.primaryLight
-            : // Android has ripple, so no need to change background
-            Platform.OS === 'android'
+            : isAndroid // Android has ripple, so no need to change background
             ? Color.primary
             : pressed // iOS
             ? Color.primaryLight

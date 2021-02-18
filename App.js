@@ -13,7 +13,6 @@ import {
   View,
   StatusBar,
   Text,
-  Platform,
   Pressable,
 } from 'react-native'
 import {
@@ -25,6 +24,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen'
 import { Color } from './src/styles/Color'
 import { Dimension } from './src/styles/Dimension'
+import { isAndroid } from './src/utils/platform'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DeckStoreContext from './src/deck/DeckStoreContext'
 import deckStore from './src/deck/DeckStore'
@@ -37,7 +37,7 @@ import NewCardScreen from './src/screens/NewCardScreen'
 import QuizScreen from './src/screens/QuizScreen'
 
 StatusBar.setBarStyle('dark-content', false)
-if (Platform.OS === 'android') {
+if (isAndroid) {
   StatusBar.setBackgroundColor(Color.primary, false)
 }
 
