@@ -1,11 +1,12 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { isiOS } from '../utils/platform'
 
 export default function CustomSafeAreaView(props) {
-  const edges = isiOS
-    ? ['right', 'bottom', 'left']
-    : ['right', 'bottom', 'left', 'top']
+  const edges = Platform.select({
+    ios: ['right', 'bottom', 'left'],
+    android: ['right', 'bottom', 'left', 'top'],
+  })
   return (
     <SafeAreaView style={[{ flex: 1 }, props.style]} edges={edges} {...props}>
       {props.children}
