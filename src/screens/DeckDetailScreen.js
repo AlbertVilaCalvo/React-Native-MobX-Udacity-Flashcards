@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import DeckNotFound from '../components/DeckNotFound'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
 import { TextTitle } from '../components/styled/text'
+import CustomButton from '../components/styled/CustomButton'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckStore = useDeckStore()
@@ -33,14 +34,16 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
       <TextTitle>{deck.name}</TextTitle>
       <Text style={styles.bottomMargin}>ID: {deckId}</Text>
       <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
-      <Button
-        title="Add Card"
+      <CustomButton
+        text="Add Card"
         onPress={() => navigation.navigate('NewCard', { deckId })}
+        style={styles.bottomMargin}
       />
-      <Button
-        title="Start Quiz"
+      <CustomButton
+        text="Start Quiz"
         onPress={() => navigation.navigate('Quiz', { deckId })}
         disabled={deck.cardCount === 0}
+        style={styles.bottomMargin}
       />
       <TouchableOpacity onPress={deleteDeck}>
         <Text>Delete Deck</Text>

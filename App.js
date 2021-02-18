@@ -65,7 +65,7 @@ const App: () => React$Node = () => {
                     style={({ pressed }) => [
                       {
                         backgroundColor: pressed
-                          ? Color.primaryHighlight
+                          ? Color.primaryLight
                           : 'transparent',
                         paddingHorizontal: 8,
                         paddingVertical: 6,

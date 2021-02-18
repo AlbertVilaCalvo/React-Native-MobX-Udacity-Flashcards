@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, Button, TouchableOpacity, StyleSheet, View } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet, View } from 'react-native'
+import CustomButton from '../components/styled/CustomButton'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -15,10 +16,10 @@ const HomeScreen = observer(({ navigation }) => {
     return (
       <CustomSafeAreaView style={sharedStyles.containerCentered}>
         <TextBody style={styles.noDecksText}>
-          You don't have any decks yet.
+          You don't have any deck yet.
         </TextBody>
-        <Button
-          title="Create one!"
+        <CustomButton
+          text="Create one!"
           onPress={() => navigation.navigate('NewDeck')}
         />
       </CustomSafeAreaView>

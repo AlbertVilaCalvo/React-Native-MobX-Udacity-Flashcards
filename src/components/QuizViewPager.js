@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
+import CustomButton from './styled/CustomButton'
 
 const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
@@ -51,17 +52,23 @@ const QuizViewPager = ({ deck }) => {
           {cardStates[index].showAnswer ? (
             <Text>{card.answer}</Text>
           ) : (
-            <Button title="Show Answer" onPress={() => onShowAnswer(index)} />
+            <CustomButton
+              text="Show Answer"
+              onPress={() => onShowAnswer(index)}
+              style={styles.marginVertical}
+            />
           )}
           {cardStates[index].answer === null ? (
             <>
-              <Button
-                title="Correct"
+              <CustomButton
+                text="Correct"
+                style={styles.marginVertical}
                 onPress={() => onSetAnswer(index, ANSWER_CORRECT)}
               />
-              <Button
-                title="Incorrect"
+              <CustomButton
+                text="Incorrect"
                 onPress={() => onSetAnswer(index, ANSWER_INCORRECT)}
+                style={styles.marginVertical}
               />
             </>
           ) : (
@@ -112,8 +119,16 @@ const SummaryPage = ({ cardStates, onReset }) => {
       ) : (
         <Text>You have not answered all questions yet.</Text>
       )}
-      <Button title="Restart Quiz" onPress={onReset} />
-      <Button title="Back to Deck" onPress={backPress} />
+      <CustomButton
+        text="Restart Quiz"
+        onPress={onReset}
+        style={styles.marginVertical}
+      />
+      <CustomButton
+        text="Back to Deck"
+        onPress={backPress}
+        style={styles.marginVertical}
+      />
     </>
   )
 }
@@ -128,5 +143,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  marginVertical: {
+    marginVertical: 5,
   },
 })

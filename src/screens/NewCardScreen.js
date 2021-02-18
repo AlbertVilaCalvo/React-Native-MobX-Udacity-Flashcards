@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Button, TextInput, StyleSheet } from 'react-native'
+import { TextInput, StyleSheet } from 'react-native'
 import sharedStyles from '../styles/sharedStyles'
 import useDeckStore from '../deck/useDeckStore'
 import { Card } from '../deck/Card'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
+import CustomButton from '../components/styled/CustomButton'
 
 const NewCardScreen = ({ route, navigation }) => {
   const [question, setQuestion] = useState('')
@@ -33,8 +34,8 @@ const NewCardScreen = ({ route, navigation }) => {
         onChangeText={(text) => setAnswer(text)}
         defaultValue={answer}
       />
-      <Button
-        title="Add Card"
+      <CustomButton
+        text="Add Card"
         disabled={question.trim() === '' || answer.trim() === ''}
         onPress={onPress}
       />

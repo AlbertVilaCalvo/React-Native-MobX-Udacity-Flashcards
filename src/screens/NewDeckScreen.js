@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { TextInput, Button } from 'react-native'
+import { TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
+import CustomButton from '../components/styled/CustomButton'
 
 const NewDeckScreen = () => {
   const navigation = useNavigation()
@@ -23,8 +24,8 @@ const NewDeckScreen = () => {
         onChangeText={(text) => setInput(text)}
         defaultValue={input}
       />
-      <Button
-        title="Create New Deck"
+      <CustomButton
+        text="Create New Deck"
         disabled={input.trim() === ''}
         onPress={onPress}
       />
