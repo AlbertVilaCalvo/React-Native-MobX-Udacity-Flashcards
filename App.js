@@ -13,6 +13,7 @@ import {
   View,
   StatusBar,
   Text,
+  Platform,
   Pressable,
 } from 'react-native'
 import {
@@ -35,6 +36,9 @@ import NewCardScreen from './src/screens/NewCardScreen'
 import QuizScreen from './src/screens/QuizScreen'
 
 StatusBar.setBarStyle('dark-content', false)
+if (Platform.OS === 'android') {
+  StatusBar.setBackgroundColor(Color.primary, false)
+}
 
 const Stack = createStackNavigator()
 
