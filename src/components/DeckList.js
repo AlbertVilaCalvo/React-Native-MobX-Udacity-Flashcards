@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import { useNavigation } from '@react-navigation/native'
 import { TextBody, TextTitle } from './styled/text'
+import { Color } from '../styles/Color'
 import { Dimension } from '../styles/Dimension'
 
 export default function DeckList({ decks }) {
@@ -22,7 +23,10 @@ const DeckListItem = observer(({ deck }) => {
   return (
     <Pressable
       onPress={() => navigation.navigate('DeckDetail', { deckId: deck.id })}
-      style={styles.deckListItemContainer}>
+      style={({ pressed }) => [
+        styles.deckListItemContainer,
+        { backgroundColor: pressed ? Color.darkLight : Color.dark },
+      ]}>
       <TextTitle style={styles.textName}>{deck.name}</TextTitle>
       <TextBody style={styles.textCount}>{deck.cardCountFormatted}</TextBody>
       <Text>{deck.id}</Text>
@@ -37,7 +41,6 @@ const styles = StyleSheet.create({
   deckListItemContainer: {
     alignSelf: 'stretch',
     padding: 20,
-    backgroundColor: 'darkslategray',
     marginLeft: 16,
     marginRight: 16,
     marginTop: 16,
