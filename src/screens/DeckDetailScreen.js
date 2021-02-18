@@ -7,6 +7,7 @@ import DeckNotFound from '../components/DeckNotFound'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
 import { TextTitle } from '../components/styled/text'
 import CustomButton from '../components/styled/CustomButton'
+import HeaderButton from '../components/styled/HeaderButton'
 
 const DeckDetailScreen = observer(({ route, navigation }) => {
   const deckStore = useDeckStore()
@@ -15,17 +16,23 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
 
   useLayoutEffect(() => {
     if (deck !== null) {
-      navigation.setOptions({ title: deck.name })
+      navigation.setOptions({
+        title: deck.name,
+        headerRight: () => (
+          <HeaderButton
+            text="Delete Deck"
+            onPress={() => {
+              deckStore.removeDeck(deckId)
+              navigation.goBack()
+            }}
+          />
+        ),
+      })
     }
-  }, [deck, navigation])
+  }, [deck, deckId, deckStore, navigation])
 
   if (deck === null) {
     return <DeckNotFound deckId={deckId} />
-  }
-
-  const deleteDeck = () => {
-    deckStore.removeDeck(deckId)
-    navigation.goBack()
   }
 
   return (
@@ -43,11 +50,7 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
         text="Start Quiz"
         onPress={() => navigation.navigate('Quiz', { deckId })}
         disabled={deck.cardCount === 0}
-        style={styles.bottomMargin}
       />
-      <TouchableOpacity onPress={deleteDeck}>
-        <Text>Delete Deck</Text>
-      </TouchableOpacity>
     </CustomSafeAreaView>
   )
 })
