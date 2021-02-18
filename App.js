@@ -24,6 +24,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
 import { Color } from './src/styles/Color'
+import { Dimension } from './src/styles/Dimension'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DeckStoreContext from './src/deck/DeckStoreContext'
 import deckStore from './src/deck/DeckStore'
@@ -66,11 +67,13 @@ const App: () => React$Node = () => {
                         backgroundColor: pressed
                           ? Color.primaryHighlight
                           : 'transparent',
-                        padding: 10,
-                        borderRadius: 4,
+                        paddingHorizontal: 8,
+                        paddingVertical: 6,
+                        marginRight: 5,
+                        borderRadius: Dimension.borderRadius,
                       },
                     ]}>
-                    <Text style={{ color: 'white' }}>Create New Deck</Text>
+                    <Text style={{ color: 'white' }}>New Deck</Text>
                   </Pressable>
                 ),
               })}

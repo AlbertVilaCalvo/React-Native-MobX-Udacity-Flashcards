@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import { useNavigation } from '@react-navigation/native'
 import { TextBody, TextTitle } from './styled/text'
+import { Dimension } from '../styles/Dimension'
 
 export default function DeckList({ decks }) {
   return (
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginRight: 16,
     marginTop: 16,
-    borderRadius: 4,
+    borderRadius: Dimension.borderRadius,
   },
   textName: {
     alignSelf: 'center',
