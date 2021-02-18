@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import { observer } from 'mobx-react-lite'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -15,20 +15,21 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   const deck = deckStore.getDeck(deckId)
 
   useLayoutEffect(() => {
-    if (deck !== null) {
-      navigation.setOptions({
-        title: deck.name,
-        headerRight: () => (
-          <HeaderButton
-            text="Delete Deck"
-            onPress={() => {
-              deckStore.removeDeck(deckId)
-              navigation.goBack()
-            }}
-          />
-        ),
-      })
+    if (deck === null) {
+      return
     }
+    navigation.setOptions({
+      title: deck.name,
+      headerRight: () => (
+        <HeaderButton
+          text="Delete Deck"
+          onPress={() => {
+            deckStore.removeDeck(deckId)
+            navigation.goBack()
+          }}
+        />
+      ),
+    })
   }, [deck, deckId, deckStore, navigation])
 
   if (deck === null) {
