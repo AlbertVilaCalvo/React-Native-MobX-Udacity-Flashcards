@@ -4,8 +4,7 @@ import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
 import CustomButton from './styled/CustomButton'
 import { scheduleNotification } from '../utils/notification'
-import { TextBody, TextHeading, TextTitle } from './styled/text'
-import sharedStyles from '../styles/sharedStyles'
+import { TextBody, TextHeading } from './styled/text'
 import { Color } from '../styles/Color'
 
 const ANSWER_CORRECT = 'correct'
@@ -52,12 +51,14 @@ const QuizViewPager = ({ deck }) => {
           <TextBody style={styles.topTitle}>
             Question {index + 1}/{cardCount}
           </TextBody>
-          <View style={sharedStyles.containerCentered}>
+          <View style={styles.middleContainer}>
             <TextHeading style={styles.textQuestion}>
               {card.question}
             </TextHeading>
             {cardStates[index].showAnswer ? (
-              <TextHeading style={styles.textAnswer}>{card.answer}</TextHeading>
+              <TextHeading style={styles.textCenterMargin}>
+                {card.answer}
+              </TextHeading>
             ) : (
               <CustomButton
                 text="Show Answer"
@@ -79,7 +80,10 @@ const QuizViewPager = ({ deck }) => {
                 />
               </>
             ) : (
-              <TextHeading>Your answer: {cardStates[index].answer}</TextHeading>
+              <TextHeading>
+                Your answer:{' '}
+                <Text style={styles.textBold}>{cardStates[index].answer}</Text>
+              </TextHeading>
             )}
           </View>
         </View>
@@ -122,19 +126,25 @@ const SummaryPage = ({ cardStates, onReset }) => {
   return (
     <>
       <TextBody style={styles.topTitle}>Summary</TextBody>
-      <View style={sharedStyles.containerCentered}>
+      <View style={styles.middleContainer}>
         {isDone ? (
           <>
             <TextBody>Your score</TextBody>
             <TextHeading style={styles.textCorrect}>
-              Correct: {correctAnswers}/{totalAnswers}
+              Correct:{' '}
+              <Text style={styles.textBold}>
+                {correctAnswers}/{totalAnswers}
+              </Text>
             </TextHeading>
             <TextHeading>
-              Incorrect: {incorrectAnswers}/{totalAnswers}
+              Incorrect:{' '}
+              <Text style={styles.textBold}>
+                {incorrectAnswers}/{totalAnswers}
+              </Text>
             </TextHeading>
           </>
         ) : (
-          <TextHeading style={sharedStyles.textAlignCenter}>
+          <TextHeading style={styles.textCenterMargin}>
             You have not answered all questions yet.
           </TextHeading>
         )}
@@ -167,9 +177,15 @@ const styles = StyleSheet.create({
     color: Color.primary,
     fontWeight: 'bold',
   },
+  middleContainer: {
+    flex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   bottomContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 4,
+    alignItems: 'flex-start',
     marginBottom: 80,
   },
   bottomButton: {
@@ -177,14 +193,17 @@ const styles = StyleSheet.create({
   },
   textQuestion: {
     marginBottom: 30,
-    marginHorizontal: 20,
+    marginHorizontal: 30,
     textAlign: 'center',
   },
-  textAnswer: {
-    marginHorizontal: 20,
+  textCenterMargin: {
+    marginHorizontal: 30,
     textAlign: 'center',
   },
   textCorrect: {
     marginVertical: 20,
+  },
+  textBold: {
+    fontWeight: 'bold',
   },
 })

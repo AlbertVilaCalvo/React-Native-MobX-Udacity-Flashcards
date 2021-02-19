@@ -18,7 +18,6 @@ const sharedStyles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   textInput: { height: 40, fontSize: 18 },
-  textAlignCenter: { textAlign: 'center' },
 })
 
 export default sharedStyles
