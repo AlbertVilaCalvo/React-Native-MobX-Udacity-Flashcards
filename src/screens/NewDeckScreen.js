@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextInput } from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
@@ -19,7 +19,7 @@ const NewDeckScreen = () => {
   return (
     <CustomSafeAreaView style={sharedStyles.containerCenteredPaddingHorizontal}>
       <TextInput
-        style={sharedStyles.textInput}
+        style={[sharedStyles.textInput, styles.input]}
         placeholder="New Deck Name"
         onChangeText={(text) => setInput(text)}
         defaultValue={input}
@@ -34,3 +34,9 @@ const NewDeckScreen = () => {
 }
 
 export default NewDeckScreen
+
+const styles = StyleSheet.create({
+  input: {
+    marginBottom: 20,
+  },
+})

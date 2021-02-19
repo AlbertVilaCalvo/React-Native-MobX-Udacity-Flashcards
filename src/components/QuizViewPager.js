@@ -4,6 +4,8 @@ import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
 import CustomButton from './styled/CustomButton'
 import { scheduleNotification } from '../utils/notification'
+import { TextBody, TextHeading, TextTitle } from './styled/text'
+import sharedStyles from '../styles/sharedStyles'
 
 const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
@@ -46,12 +48,12 @@ const QuizViewPager = ({ deck }) => {
       showPageIndicator={true}>
       {deck.cards.map((card, index) => (
         <View style={styles.pageContainer} collapsable={false} key={index}>
-          <Text>
+          <TextBody>
             Question {index + 1}/{cardCount}
-          </Text>
-          <Text>{card.question}</Text>
+          </TextBody>
+          <TextHeading>{card.question}</TextHeading>
           {cardStates[index].showAnswer ? (
-            <Text>{card.answer}</Text>
+            <TextHeading>{card.answer}</TextHeading>
           ) : (
             <CustomButton
               text="Show Answer"
@@ -73,7 +75,7 @@ const QuizViewPager = ({ deck }) => {
               />
             </>
           ) : (
-            <Text>Your answer: {cardStates[index].answer}</Text>
+            <TextHeading>Your answer: {cardStates[index].answer}</TextHeading>
           )}
         </View>
       ))}
@@ -114,19 +116,21 @@ const SummaryPage = ({ cardStates, onReset }) => {
 
   return (
     <>
-      <Text>Summary</Text>
+      <TextBody>Summary</TextBody>
       {isDone ? (
         <>
-          <Text>Your score</Text>
-          <Text>
+          <TextBody>Your score</TextBody>
+          <TextHeading>
             Correct: {correctAnswers}/{totalAnswers}
-          </Text>
-          <Text>
+          </TextHeading>
+          <TextHeading>
             Incorrect: {incorrectAnswers}/{totalAnswers}
-          </Text>
+          </TextHeading>
         </>
       ) : (
-        <Text>You have not answered all questions yet.</Text>
+        <TextHeading style={sharedStyles.textAlignCenter}>
+          You have not answered all questions yet.
+        </TextHeading>
       )}
       <CustomButton
         text="Restart Quiz"
@@ -154,6 +158,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   marginVertical: {
+    marginVertical: 5,
+  },
+  textQuestion: {
     marginVertical: 5,
   },
 })

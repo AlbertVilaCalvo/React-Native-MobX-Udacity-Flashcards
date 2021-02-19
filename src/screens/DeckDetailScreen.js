@@ -5,7 +5,7 @@ import useDeckStore from '../deck/useDeckStore'
 import sharedStyles from '../styles/sharedStyles'
 import DeckNotFound from '../components/DeckNotFound'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
-import { TextTitle } from '../components/styled/text'
+import { TextHeading, TextTitle } from '../components/styled/text'
 import CustomButton from '../components/styled/CustomButton'
 import HeaderButton from '../components/styled/HeaderButton'
 
@@ -39,9 +39,11 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
   return (
     <CustomSafeAreaView
       style={sharedStyles.containerCenterVerticalPaddingHorizontal}>
-      <TextTitle>{deck.name}</TextTitle>
+      <TextTitle style={styles.bottomMargin}>{deck.name}</TextTitle>
+      <TextHeading style={styles.bottomMargin}>
+        {deck.cardCountFormatted}
+      </TextHeading>
       <Text style={styles.bottomMargin}>ID: {deckId}</Text>
-      <Text style={styles.bottomMargin}>{deck.cardCountFormatted}</Text>
       <CustomButton
         text="Add Card"
         onPress={() => navigation.navigate('NewCard', { deckId })}

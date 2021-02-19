@@ -23,7 +23,7 @@ const NewCardScreen = ({ route, navigation }) => {
     <CustomSafeAreaView
       style={sharedStyles.containerCenterVerticalPaddingHorizontal}>
       <TextInput
-        style={sharedStyles.textInput}
+        style={[sharedStyles.textInput, styles.textInputQuestion]}
         placeholder="Question"
         onChangeText={(text) => setQuestion(text)}
         defaultValue={question}
@@ -46,7 +46,10 @@ const NewCardScreen = ({ route, navigation }) => {
 export default NewCardScreen
 
 const styles = StyleSheet.create({
-  textInputAnswer: {
+  textInputQuestion: {
     marginBottom: 20,
+  },
+  textInputAnswer: {
+    marginBottom: 40,
   },
 })

@@ -23,7 +23,6 @@ const QuizScreen = ({ route, navigation }) => {
 
   return (
     <CustomSafeAreaView>
-      <Text>Quiz</Text>
       <QuizViewPager deck={deck} />
     </CustomSafeAreaView>
   )
