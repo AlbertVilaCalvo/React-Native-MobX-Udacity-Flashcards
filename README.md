@@ -2,6 +2,12 @@
 
 React Native project of the [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019).
 
+The app allows you to create decks with questions and answers of topics you want to learn about.
+
+It sends you a notification every day to remind you to refresh your knowledge.
+
+The app uses MobX for state management. Data is persisted on the device with AsyncStorage.
+
 This project was created with `npx react-native init UdacityFlashcards`.
 
 
@@ -29,7 +35,7 @@ or
 
 `${ANDROID_HOME}/emulator/emulator -avd Galaxy_Nexus_API_22_5.1_xhdpi_-_Google_APIs &`
 
-`emulator -list-avds` lists the existing emulators.
+Use `emulator -list-avds` to list the existing emulators.
 
 
 ## Reload code
