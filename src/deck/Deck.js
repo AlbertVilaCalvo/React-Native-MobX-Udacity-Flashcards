@@ -3,11 +3,12 @@ import { action, computed, makeObservable, observable } from 'mobx'
 export default class Deck {
   id // string, immutable
   name // string, immutable
-  cards = [] // Card[], mutable
+  cards // Card[], mutable
 
-  constructor(name) {
-    this.id = randomId()
+  constructor(name, id = randomId(), cards = []) {
     this.name = name
+    this.id = id
+    this.cards = cards
     makeObservable(this, {
       cards: observable,
       cardCount: computed,

@@ -1,8 +1,11 @@
-import { action, autorun, makeObservable, observable } from 'mobx'
+import { action, autorun, makeObservable, observable, runInAction } from 'mobx'
 import Deck from './Deck'
+import { persistDecks, retrievePersistedDecks } from '../utils/storage'
+import { Card } from './Card'
 
 class DeckStore {
   decks = []
+  decksInitialized = false
 
   constructor() {
     makeObservable(this, {
@@ -10,7 +13,35 @@ class DeckStore {
       addDeck: action,
       removeDeck: action,
     })
-    autorun(() => console.log(this.decks))
+
+    autorun(() => {
+      console.log('decks updated:', JSON.stringify(this.decks))
+      // When the app starts autorun() immediately executes with this.decks
+      // being []. We need to wait till we've initialized this.decks with the
+      // persisted decks before calling persistDecks(), otherwise we loose the
+      // persisted decks.
+      if (!this.decksInitialized) {
+        return
+      }
+      persistDecks(this.decks)
+    })
+
+    retrievePersistedDecks()
+      .then((persistedDecks) => {
+        if (persistedDecks != null) {
+          runInAction(() => {
+            persistedDecks.forEach((deck) => {
+              const cards = deck.cards.map(
+                (card) => new Card(card.question, card.answer),
+              )
+              this.decks.push(new Deck(deck.name, deck.id, cards))
+            })
+          })
+        }
+      })
+      .finally(() => {
+        this.decksInitialized = true
+      })
   }
 
   addDeck(name) {
