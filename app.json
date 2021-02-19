@@ -1,4 +1,9 @@
 {
   "name": "UdacityFlashcards",
-  "displayName": "UdacityFlashcards"
+  "displayName": "UdacityFlashcards",
+  "expo": {
+    "android": {
+      "useNextNotificationsApi": true
+    }
+  }
 }

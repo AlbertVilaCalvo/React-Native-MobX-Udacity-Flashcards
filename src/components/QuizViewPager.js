@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import ViewPager from '@react-native-community/viewpager'
 import { useNavigation } from '@react-navigation/native'
 import CustomButton from './styled/CustomButton'
+import { scheduleNotification } from '../utils/notification'
 
 const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
@@ -89,12 +90,20 @@ const QuizViewPager = ({ deck }) => {
 
 const SummaryPage = ({ cardStates, onReset }) => {
   const navigation = useNavigation()
+  const [notificationScheduled, setNotificationScheduled] = useState(false)
 
   const backPress = () => {
     navigation.goBack()
   }
 
   const isDone = cardStates.every((state) => state.answer !== null)
+
+  // When the user completes a deck we cancel the current notification for today
+  // and we schedule a new one for the next day at the current time.
+  if (isDone && !notificationScheduled) {
+    setNotificationScheduled(true)
+    scheduleNotification()
+  }
 
   const totalAnswers = cardStates.length
   const correctAnswers = cardStates.reduce(
