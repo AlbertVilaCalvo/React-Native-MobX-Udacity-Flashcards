@@ -7,6 +7,7 @@ import sharedStyles from '../styles/sharedStyles'
 import DeckList from '../components/DeckList'
 import { TextBody } from '../components/styled/text'
 import CustomSafeAreaView from '../components/CustomSafeAreaView'
+import { showNotification } from '../utils/notification'
 
 const HomeScreen = observer(({ navigation }) => {
   const deckStore = useDeckStore()
@@ -21,6 +22,12 @@ const HomeScreen = observer(({ navigation }) => {
         <CustomButton
           text="Create one!"
           onPress={() => navigation.navigate('NewDeck')}
+        />
+        <CustomButton
+          text="Push"
+          onPress={() => {
+            showNotification()
+          }}
         />
       </CustomSafeAreaView>
     )
