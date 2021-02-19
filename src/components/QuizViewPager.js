@@ -6,6 +6,7 @@ import CustomButton from './styled/CustomButton'
 import { scheduleNotification } from '../utils/notification'
 import { TextBody, TextHeading, TextTitle } from './styled/text'
 import sharedStyles from '../styles/sharedStyles'
+import { Color } from '../styles/Color'
 
 const ANSWER_CORRECT = 'correct'
 const ANSWER_INCORRECT = 'incorrect'
@@ -48,35 +49,39 @@ const QuizViewPager = ({ deck }) => {
       showPageIndicator={true}>
       {deck.cards.map((card, index) => (
         <View style={styles.pageContainer} collapsable={false} key={index}>
-          <TextBody>
+          <TextBody style={styles.topTitle}>
             Question {index + 1}/{cardCount}
           </TextBody>
-          <TextHeading>{card.question}</TextHeading>
-          {cardStates[index].showAnswer ? (
-            <TextHeading>{card.answer}</TextHeading>
-          ) : (
-            <CustomButton
-              text="Show Answer"
-              onPress={() => onShowAnswer(index)}
-              style={styles.marginVertical}
-            />
-          )}
-          {cardStates[index].answer === null ? (
-            <>
+          <View style={sharedStyles.containerCentered}>
+            <TextHeading style={styles.textQuestion}>
+              {card.question}
+            </TextHeading>
+            {cardStates[index].showAnswer ? (
+              <TextHeading style={styles.textAnswer}>{card.answer}</TextHeading>
+            ) : (
               <CustomButton
-                text="Correct"
-                style={styles.marginVertical}
-                onPress={() => onSetAnswer(index, ANSWER_CORRECT)}
+                text="Show Answer"
+                onPress={() => onShowAnswer(index)}
               />
-              <CustomButton
-                text="Incorrect"
-                onPress={() => onSetAnswer(index, ANSWER_INCORRECT)}
-                style={styles.marginVertical}
-              />
-            </>
-          ) : (
-            <TextHeading>Your answer: {cardStates[index].answer}</TextHeading>
-          )}
+            )}
+          </View>
+          <View style={styles.bottomContainer}>
+            {cardStates[index].answer === null ? (
+              <>
+                <CustomButton
+                  text="Correct"
+                  style={styles.bottomButton}
+                  onPress={() => onSetAnswer(index, ANSWER_CORRECT)}
+                />
+                <CustomButton
+                  text="Incorrect"
+                  onPress={() => onSetAnswer(index, ANSWER_INCORRECT)}
+                />
+              </>
+            ) : (
+              <TextHeading>Your answer: {cardStates[index].answer}</TextHeading>
+            )}
+          </View>
         </View>
       ))}
 
@@ -116,32 +121,32 @@ const SummaryPage = ({ cardStates, onReset }) => {
 
   return (
     <>
-      <TextBody>Summary</TextBody>
-      {isDone ? (
-        <>
-          <TextBody>Your score</TextBody>
-          <TextHeading>
-            Correct: {correctAnswers}/{totalAnswers}
+      <TextBody style={styles.topTitle}>Summary</TextBody>
+      <View style={sharedStyles.containerCentered}>
+        {isDone ? (
+          <>
+            <TextBody>Your score</TextBody>
+            <TextHeading style={styles.textCorrect}>
+              Correct: {correctAnswers}/{totalAnswers}
+            </TextHeading>
+            <TextHeading>
+              Incorrect: {incorrectAnswers}/{totalAnswers}
+            </TextHeading>
+          </>
+        ) : (
+          <TextHeading style={sharedStyles.textAlignCenter}>
+            You have not answered all questions yet.
           </TextHeading>
-          <TextHeading>
-            Incorrect: {incorrectAnswers}/{totalAnswers}
-          </TextHeading>
-        </>
-      ) : (
-        <TextHeading style={sharedStyles.textAlignCenter}>
-          You have not answered all questions yet.
-        </TextHeading>
-      )}
-      <CustomButton
-        text="Restart Quiz"
-        onPress={onReset}
-        style={styles.marginVertical}
-      />
-      <CustomButton
-        text="Back to Deck"
-        onPress={backPress}
-        style={styles.marginVertical}
-      />
+        )}
+      </View>
+      <View style={styles.bottomContainer}>
+        <CustomButton
+          text="Restart Quiz"
+          onPress={onReset}
+          style={styles.bottomButton}
+        />
+        <CustomButton text="Back to Deck" onPress={backPress} />
+      </View>
     </>
   )
 }
@@ -157,10 +162,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  marginVertical: {
-    marginVertical: 5,
+  topTitle: {
+    marginTop: 40,
+    color: Color.primary,
+    fontWeight: 'bold',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 80,
+  },
+  bottomButton: {
+    marginRight: 25,
   },
   textQuestion: {
-    marginVertical: 5,
+    marginBottom: 30,
+    marginHorizontal: 20,
+    textAlign: 'center',
+  },
+  textAnswer: {
+    marginHorizontal: 20,
+    textAlign: 'center',
+  },
+  textCorrect: {
+    marginVertical: 20,
   },
 })
