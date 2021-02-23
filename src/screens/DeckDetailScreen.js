@@ -25,7 +25,9 @@ const DeckDetailScreen = observer(({ route, navigation }) => {
           text="Delete Deck"
           onPress={() => {
             deckStore.removeDeck(deckId)
-            navigation.goBack()
+            // If we've just created the deck, on back press we want to go
+            // to the Home without seeing the NewDeckScreen in between
+            navigation.navigate('Home')
           }}
         />
       ),

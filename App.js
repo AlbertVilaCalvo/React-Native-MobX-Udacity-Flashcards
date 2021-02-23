@@ -7,14 +7,7 @@
  */
 
 import React from 'react'
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  StatusBar,
-  Text,
-  Pressable,
-} from 'react-native'
+import { StyleSheet, ScrollView, View, StatusBar, Text } from 'react-native'
 import {
   Header,
   LearnMoreLinks,
@@ -23,13 +16,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
 import { Color } from './src/styles/Color'
-import { Dimension } from './src/styles/Dimension'
 import { isAndroid } from './src/utils/platform'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import DeckStoreContext from './src/deck/DeckStoreContext'
 import deckStore from './src/deck/DeckStore'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack'
 import HomeScreen from './src/screens/HomeScreen'
 import DeckDetailScreen from './src/screens/DeckDetailScreen'
 import NewDeckScreen from './src/screens/NewDeckScreen'
@@ -72,7 +64,20 @@ const App: () => React$Node = () => {
             <Stack.Screen
               name="DeckDetail"
               component={DeckDetailScreen}
-              options={{ title: 'Deck Detail', headerBackTitle: 'Home' }}
+              options={({ navigation, route }) => ({
+                title: 'Deck Detail',
+                headerBackTitle: 'Home',
+                headerLeft: (props) => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      // If we've just created the deck, on back press we want to go
+                      // to the Home without seeing the NewDeckScreen in between
+                      navigation.navigate('Home')
+                    }}
+                  />
+                ),
+              })}
             />
             <Stack.Screen name="Quiz" component={QuizScreen} />
             <Stack.Screen
