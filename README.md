@@ -10,26 +10,26 @@ The app uses MobX for state management. Data is persisted on the device with Asy
 
 This project was created with `npx react-native init UdacityFlashcards`.
 
+## Install dependencies
+
+`yarn install` or just `yarn`
 
 ## Start bundler
 
 `npx react-native start`
 
-
 ## Run instructions for iOS
 
-`npx react-native run-ios`
+`npx react-native run-ios` or `npx react-native run-ios --simulator "iPhone 11"` (use `xcrun simctl list devices` to list the simulators)
 
 or
 - Open UdacityFlashcards/ios/UdacityFlashcards.xcworkspace in Xcode or run "xed -b ios"
 - Hit the Run button
 
-
 ## Run instructions for Android
 
 - Have an Android emulator running (quickest way to get started), or a device connected.
 - `npx react-native run-android`
-
 
 ## Launch Android emulator
 
@@ -37,13 +37,11 @@ or
 
 Use `emulator -list-avds` to list the existing emulators.
 
-
 ## Reload code
 
 - Android: double tap R on your keyboard.
 
 - iOS: press Cmd + R in the simulator.
-
 
 ## Open debug menu
 
