@@ -48,3 +48,7 @@ Use `emulator -list-avds` to list the existing emulators.
 - Android: Press Cmd or Ctrl + M or shake your device.
 
 - iOS: Press Cmd + D or shake your device (Cmd + Ctrl + Z).
+
+## Screenshots
+
+<img src="app-demo.gif" alt="App screenshots">
