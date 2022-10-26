@@ -22,7 +22,7 @@ const NewDeckScreen = () => {
         style={[sharedStyles.textInput, styles.input]}
         placeholder="New Deck Name"
         onChangeText={setDeckName}
-        defaultValue={deckName}
+        value={deckName}
       />
       <CustomButton
         text="Create New Deck"

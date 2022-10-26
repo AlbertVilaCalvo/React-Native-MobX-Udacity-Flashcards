@@ -31,7 +31,7 @@ const NewCardScreen = ({ route, navigation }) => {
         style={[sharedStyles.textInput, styles.textInputQuestion]}
         placeholder="Question"
         onChangeText={setQuestion}
-        defaultValue={question}
+        value={question}
         returnKeyType="next"
         onSubmitEditing={() => answerInput.current.focus()}
       />
@@ -40,7 +40,7 @@ const NewCardScreen = ({ route, navigation }) => {
         style={[sharedStyles.textInput, styles.textInputAnswer]}
         placeholder="Answer"
         onChangeText={setAnswer}
-        defaultValue={answer}
+        value={answer}
         returnKeyType="done"
         onSubmitEditing={onPress}
       />
