@@ -21,7 +21,7 @@ const NewDeckScreen = () => {
       <TextInput
         style={[sharedStyles.textInput, styles.input]}
         placeholder="New Deck Name"
-        onChangeText={(text) => setInput(text)}
+        onChangeText={setInput}
         defaultValue={input}
       />
       <CustomButton
