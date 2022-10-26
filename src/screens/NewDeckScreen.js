@@ -9,10 +9,10 @@ import CustomButton from '../components/styled/CustomButton'
 const NewDeckScreen = () => {
   const navigation = useNavigation()
   const deckStore = useDeckStore()
-  const [input, setInput] = useState('')
+  const [deckName, setDeckName] = useState('')
 
   const onPress = () => {
-    const newDeck = deckStore.addDeck(input)
+    const newDeck = deckStore.addDeck(deckName)
     navigation.navigate('DeckDetail', { deckId: newDeck.id })
   }
 
@@ -21,12 +21,12 @@ const NewDeckScreen = () => {
       <TextInput
         style={[sharedStyles.textInput, styles.input]}
         placeholder="New Deck Name"
-        onChangeText={setInput}
-        defaultValue={input}
+        onChangeText={setDeckName}
+        defaultValue={deckName}
       />
       <CustomButton
         text="Create New Deck"
-        disabled={input.trim() === ''}
+        disabled={deckName.trim() === ''}
         onPress={onPress}
       />
     </CustomSafeAreaView>
